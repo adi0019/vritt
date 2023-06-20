@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Vritt</string>
+    <string name="state">State*</string>
+    <string name="district">District*</string>
+    <string name="submit">Submit</string>
+    <string name="next">next</string>
+    <string name="app_third">Address</string>
+    <string name="Dayitva_Level">Dayitva_Level</string>
+
+    <string name="select">Enter your Profession</string>
+
+    <string name="enter_first_name">first name</string>
+    <string name="enter_middle_name">middle name</string>
+    <string name="enter_last_name">Last name</string>
+    <string name="title_desc">Learning Multiple Spinners (Populating Second Spinner based on the Selection of First Spinner)
+        <br/><br/> Using Names of Indian States in First Spinner.
+        <br/> On selecting a State, Second Spinner is populated with the Names of Districts belonging to the selected State.
+    </string>
+
+    <string-array name="array_Dayitva_Level">
+        <item>Select Your Dayitva Level</item>
+        <item>Mahanagar/Bhag/Nagar</item><item>Basti/Shakha Level</item>
+
+
+    </string-array>
+    <string-array name="array_Mahanagar">
+        <item>Select Your Mahanagar </item>
+
+
+
+    </string-array>
+    <string-array name="array_Bhag">
+        <item>Select Your Bhag</item>
+
+
+
+    </string-array>
+    <string-array name="array_Nagar">
+        <item>Select Your Nagar</item>
+
+
+
+    </string-array>
+    <string-array name="array_shakha">
+        <item>Select Your Shakha</item>
+
+
+
+
+    </string-array>
+
+<string-array name="age">
+<item>2018</item><item>2017</item><item>2016</item><item>2015</item><item>2014</item><item>2013</item>
+
+
+
+
+
+</string-array>
+
+    <string-array name="array_Dayitva">
+        <item>Select Your Dayitva</item> <item>Select Your Level</item><item>Sangh Chalak</item><item>Sah Sangh Chalak</item><item>Karyawah</item>Sah Karyawah
+        <item>Sharirik Prashikshan Pramukh</item><item>Sah Sharirik Prashikshan Pramukh</item><item>Baudhik Pramukh</item>
+        <item>Sah Baudhik Pramukh</item><item>Vyavastha Pramukh</item><item>Sah Vyavastha Pramukh</item><item>Sampark Pramjukh</item><item>Sah Sampark Pramjukh</item>
+        <item>Prachar Pramukh</item><item>Sah Prachar Pramukh</item><item>Seva Pramukh</item><item>Gatividhi-Paryavaran Sanyojak</item><item>Gatividhi – Kutumbh Probodhan Sanojak</item><item>Gatividhi – Gauseva Sanyojak
+</item><item>Gatividhi – Dharm Jagaran Sanyojak</item><item>Gatividhi – Gram Vikas Sanyojak</item>
+    </string-array>
+
+    <string-array name="array_Mahanagar_Bhag_Nagar">
+
+
+    </string-array>
+
+    <string-array name="array_Basti_Shakha_Level">
+        <item>Select Your Level</item>
+        <item>Basti Pramukh</item><item>Sah Basti Pramukh</item><item>Mukhya Shikshak</item><item>Sah Mukhyas Shikshak</item><item>Shakha Karyawah</item><item>Sah Shakha Karyawah</item>
+        <item>Gan Shikshak</item><item>Gatnayak</item>
+
+    </string-array>
+
+
+
+
+</resources>

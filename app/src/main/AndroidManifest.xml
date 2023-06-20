@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.vritt">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".Application"
+        android:allowBackup="true"
+        android:icon="@drawable/_200px_rss_flag_logo_by_devilal_svg"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/_200px_rss_flag_logo_by_devilal_svg"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DropdownMenu">
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SecondActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Address"
+            android:exported="true" />
+        <activity
+            android:name=".dashboard"
+            android:exported="true" />
+        <activity
+            android:name=".dayitva"
+            android:exported="true" />
+        <activity
+            android:name=".additionaldetails"
+            android:exported="true"></activity>
+        <activity
+            android:name=".Matra_shaka"
+            android:exported="true" />
+        <activity
+            android:name=".Attendance"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:noHistory="true">
+
+        </activity>
+        <activity
+            android:name=".splashscreen"
+            android:exported="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

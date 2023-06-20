@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:id="@+id/personalLayout">
+
+    <include layout="@layout/login_option"
+        android:id="@+id/loginoption1"/>
+
+    <include layout="@layout/layout_personal_detail"
+        android:id="@+id/llPersonal" />
+
+    <include layout="@layout/address"
+        android:id="@+id/address1" />
+
+    <include layout="@layout/matra_shaka"
+        android:id="@+id/matra_shaka1" />
+
+    <include layout="@layout/dayitva"
+        android:id="@+id/dayitva1" />
+
+    <include layout="@layout/additionaldetails"
+        android:id="@+id/additionaldetails1" />
+
+
+
+
+
+</LinearLayout>
