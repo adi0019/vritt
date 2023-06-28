@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Matra_shaka"
+    tools:context="com.dvertex.vritt.Matra_shaka"
     android:layout_gravity="center"
 
     android:orientation="vertical"

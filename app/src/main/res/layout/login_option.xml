@@ -23,7 +23,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="44dp"
-                app:srcCompat="@drawable/_200px_rss_flag_logo_by_devilal_svg" />
+                app:srcCompat="@drawable/app_logo" />
 
             <TextView
                 android:id="@+id/textView5"
