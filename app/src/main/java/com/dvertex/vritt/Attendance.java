@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dvertex.vritt.Utility.ApiClient1;
+import com.dvertex.vritt.Utility.APIClient;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
 import com.dvertex.vritt.databinding.AttendanceBinding;
 
@@ -56,11 +56,11 @@ public class Attendance extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        OkHttpClient okHttpClient = ApiClient1.withToken1();
+        OkHttpClient okHttpClient = APIClient.getHttpClientWithToken();
         String api_url = "https://gps.dvertexapp.in/dandhprahar/count";
 
         RequestBody requeestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-        Request request = ApiClient1.postData1(api_url, requeestBody);
+        Request request = APIClient.getPostRequest(api_url, requeestBody);
 
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override

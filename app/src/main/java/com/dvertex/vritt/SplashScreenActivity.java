@@ -7,21 +7,25 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dvertex.vritt.Utility.SharedPrefUtil;
+
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));
-                finish();
-            }
-        } , 2000);
 
+         String accessToken = SharedPrefUtil.getString("accessToken", "", SplashScreenActivity.this);
+        if (!accessToken.isEmpty()) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                finish();
+            }, 2000);
+        }
 
     }
 

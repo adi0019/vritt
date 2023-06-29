@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dvertex.vritt.Utility.APIClient;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
 import com.dvertex.vritt.databinding.AdditionaldetailsBinding;
 
@@ -28,9 +29,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class additionaldetails extends AppCompatActivity {
     String[] items6 = {"New", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005"};
@@ -141,11 +139,11 @@ public class additionaldetails extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        OkHttpClient okHttpClient = ApiClient.withoutToken();
+        OkHttpClient okHttpClient = APIClient.getHttpClientWithToken();
         String api_url = "https://gps.dvertexapp.in/auth/social-signin";
 
         RequestBody requeestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-        Request request = ApiClient.postData(api_url, requeestBody);
+        Request request = APIClient.getPostRequest(api_url, requeestBody);
 
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
@@ -183,7 +181,7 @@ public class additionaldetails extends AppCompatActivity {
 
             Toast.makeText(additionaldetails.this, message, Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(additionaldetails.this, dashboard.class));
+            startActivity(new Intent(additionaldetails.this, MainActivity.class));
         } catch (JSONException e) {
             e.printStackTrace();
         }

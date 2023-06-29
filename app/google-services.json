@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "222842959277",
+    "project_id": "vritt-29bf6",
+    "storage_bucket": "vritt-29bf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222842959277:android:39781d17fbfdb6a7295d24",
+        "android_client_info": {
+          "package_name": "com.dvertex.vritt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222842959277-u6qnflootgj7ehqcugmj19s6ccm8oha0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMTA2RLAPZ3mWXtZCD5KRJg_blsdU5gx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222842959277-u6qnflootgj7ehqcugmj19s6ccm8oha0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

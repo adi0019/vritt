@@ -23,7 +23,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:replace="android:allowBackup,android:appComponentFactory"
-        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:appComponentFactory="android.support.CoreComponentFactory"
         tools:targetApi="tiramisu">
         <activity
             android:name="com.dvertex.vritt.RegisterActivity"
@@ -35,7 +35,7 @@
             android:name="com.dvertex.vritt.Address"
             android:exported="true" />
         <activity
-            android:name="com.dvertex.vritt.dashboard"
+            android:name="com.dvertex.vritt.MainActivity"
             android:exported="true" />
         <activity
             android:name="com.dvertex.vritt.dayitva"
@@ -50,7 +50,7 @@
             android:name="com.dvertex.vritt.Attendance"
             android:exported="true" />
         <activity
-            android:name="com.dvertex.vritt.MainActivity"
+            android:name="com.dvertex.vritt.LoginActivity"
             android:exported="true"
             android:noHistory="true">
 
