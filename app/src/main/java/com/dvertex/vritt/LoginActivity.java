@@ -99,11 +99,11 @@ public class LoginActivity extends AppCompatActivity {
     private void hitApi(String userName, String userEmail) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("first_name", "ashish");
-            jsonObject.put("email", "ashishdangi96@gmail.com");
+            jsonObject.put("first_name", userName);
+            jsonObject.put("email", userEmail);
 
 
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         OkHttpClient okHttpClient = APIClient.getHttpClientWithToken();
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 
         RequestBody requeestBody = RequestBody.create(APIUrl.JSON, jsonObject.toString());
         Request request = APIClient.getPostRequest(api_url, requeestBody);
-        Log.e("ashish",   "" + jsonObject.toString());
+        Log.e("ashish", "" + jsonObject.toString());
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NonNull okhttp3.Call call, @NonNull IOException e) {
@@ -120,16 +120,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
-                try {
-                    Log.e("ashish", response.code() + " : " + response.body().string());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
                 runOnUiThread(() -> {
                     if (response.code() == 200) {
                         try {
-                           String data = response.body().string();
-                            setData(data);
+                            if (response.body() != null) {
+                                String data = response.body().string();
+                                setData(data);
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -159,6 +156,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
     }
-    
+
 
 }

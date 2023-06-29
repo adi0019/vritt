@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +17,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
 
-         String accessToken = SharedPrefUtil.getString("accessToken", "", SplashScreenActivity.this);
+        String accessToken = SharedPrefUtil.getString(KeyConstants.KEY_ACCESS_TOKEN, "", SplashScreenActivity.this);
         if (!accessToken.isEmpty()) {
             startActivity(new Intent(this, MainActivity.class));
         } else {

@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+        storeFile file('D:\\vritt_keystore\\vritt_keystore.jks')
+            storePassword 'dvertexvritt'
+            keyAlias 'key0'
+            keyPassword 'dvertexvritt'
+        }
+    }
     namespace 'com.dvertex.vritt'
     compileSdk 33
 
@@ -15,6 +23,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        signingConfig signingConfigs.debug
     }
 
     buildFeatures {
@@ -23,7 +32,12 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
