@@ -220,7 +220,7 @@ public class additionaldetails<intent> extends AppCompatActivity {
                         }
                     });
 
-                    // samajh aaya kya kuch ?
+
                 }
             });
         }

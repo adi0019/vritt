@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
             String email = account.getEmail();
+            String fname = account.getGivenName();
+            SharedPrefUtil.putString("fname", fname, MainActivity.this);
             SharedPrefUtil.putString("email", email, MainActivity.this);
             navigateToSecondActivity();
         } catch (ApiException e) {
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     void navigateToSecondActivity(){
         finish();
-        Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+        Intent intent = new Intent(MainActivity.this,dashboard.class);
                 startActivity(intent);
     }
 }
