@@ -16,6 +16,7 @@ import com.dvertex.vritt.databinding.AddressBinding;
 
 
 public class Address extends AppCompatActivity {
+
     Button next;
      AddressBinding binding;
     private String selectedDayitva, selectedDayitva_Level;                 //vars to hold the values of selected State and District
