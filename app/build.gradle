@@ -5,10 +5,10 @@ plugins {
 android {
     signingConfigs {
         release {
-        storeFile file('D:\\vritt_keystore\\vritt_keystore.jks')
-            storePassword 'dvertexvritt'
-            keyAlias 'key0'
-            keyPassword 'dvertexvritt'
+//        storeFile file('D:\\vritt_keystore\\vritt_keystore.jks')
+//            storePassword 'dvertexvritt'
+//            keyAlias 'key0'
+//            keyPassword 'dvertexvritt'
         }
     }
     namespace 'com.dvertex.vritt'

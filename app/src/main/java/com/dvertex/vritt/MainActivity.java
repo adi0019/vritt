@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dvertex.vritt.Utility.SharedPrefUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,20 +23,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageView =findViewById(R.id.imageView3);
 
-        Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
-        if (data != null){
-        try {
-            JSONObject jsonObject = new JSONObject(data);
-            boolean isKyc = jsonObject.optBoolean("isKYC");
+
+            boolean isKyc = SharedPrefUtil.getBoolean(KeyConstants.IS_KYC_COMPLETED, false, MainActivity.this);
             if (isKyc){
                 // keep as it is
             } else {
                 // show dialog to update
             }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }}
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {

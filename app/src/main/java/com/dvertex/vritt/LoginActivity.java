@@ -144,7 +144,9 @@ public class LoginActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(data);
             String accessToken = jsonObject.optString("accessToken");
+            boolean isKYC = jsonObject.optBoolean("isKYC");
             SharedPrefUtil.putString(KeyConstants.KEY_ACCESS_TOKEN, accessToken, this);
+            SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, isKYC, this);
 
         } catch (JSONException e) {
             throw new RuntimeException(e);

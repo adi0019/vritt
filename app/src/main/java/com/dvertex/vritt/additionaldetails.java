@@ -177,7 +177,7 @@ public class additionaldetails extends AppCompatActivity {
             SharedPrefUtil.putString("accessToken", accessToken, additionaldetails.this);
             String userId = jsonObject.optString("userId");
             SharedPrefUtil.putString("userId", userId, additionaldetails.this);
-
+            SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, true, this);
 
             Toast.makeText(additionaldetails.this, message, Toast.LENGTH_SHORT).show();
 
