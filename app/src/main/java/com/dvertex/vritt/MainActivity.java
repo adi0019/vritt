@@ -1,44 +1,56 @@
 package com.dvertex.vritt;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
+import androidx.fragment.app.FragmentManager;
 
+import com.dvertex.vritt.Fragments.AttandenceFragment;
+import com.dvertex.vritt.Fragments.DashboardFragment;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
+    AlertDialog.Builder builder;
+    FragmentContainer fragmentContainer;
+    FragmentManager fragmentManager;
+    Fragment fragment;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Dashboard");
         setContentView(R.layout.activity_main);
-        imageView =findViewById(R.id.imageView3);
 
+        attachFragment(new DashboardFragment());
 
-            boolean isKyc = SharedPrefUtil.getBoolean(KeyConstants.IS_KYC_COMPLETED, false, MainActivity.this);
-            if (isKyc){
-                // keep as it is
-            } else {
-                // show dialog to update
-            }
+    }
 
+    private void attachFragment(Fragment fragment){
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment, "TAG").commitAllowingStateLoss();
+    }
 
+    @Override
+    public void onBackPressed() {
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Attendance.class));
-                finish();
-            }
-        });
+       fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+       
+       if (fragment instanceof AttandenceFragment){
+           Toast.makeText(this, "Yes its Attand Frag", Toast.LENGTH_SHORT).show();
+           DashboardFragment fragment1 = new DashboardFragment()    ;
+           attachFragment(fragment1);
+       } else {
+           Toast.makeText(this, "No it is not", Toast.LENGTH_SHORT).show();
+       }
     }
 }

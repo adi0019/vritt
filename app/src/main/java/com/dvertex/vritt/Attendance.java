@@ -38,10 +38,10 @@ public class Attendance extends AppCompatActivity {
             public void onClick(View v) {
                 String count = binding.count1.getText().toString().trim();
 
-                String accessToken = SharedPrefUtil.getString("accessToken", "", Attendance.this);
-                String userId = SharedPrefUtil.getString("userId","", Attendance.this);
+               // String accessToken = SharedPrefUtil.getString("accessToken", "", Attendance.this);
+              //  String userId = SharedPrefUtil.getString("userId","", Attendance.this);
 
-                registeruser3(count, userId);
+              //  registeruser3(count, userId);
             }
         });
     }

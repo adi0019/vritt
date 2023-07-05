@@ -28,6 +28,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
+import javax.xml.transform.Source;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
-
             }
         });
 
@@ -84,25 +85,25 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String userName = account.getDisplayName();
             String userEmail = account.getEmail();
+            String source = "Google"; // use Google, not google
             SharedPrefUtil.putString("userName", userName, this);
             SharedPrefUtil.putString("userEmail", userEmail, this);
-            Log.w("ashish", "signInResult:success code=" + userEmail);
-            hitApi(userName, userEmail);
+            Log.w("vritt2 G login success", "" + userEmail);
 
+            hitApi(userName, userEmail, source);
 
         } catch (ApiException e) {
-            Log.w("ashish", "signInResult:failed code=" + e.getStatusCode());
+            Log.w("vritt2 G  login failed", "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void hitApi(String userName, String userEmail) {
+    private void hitApi(String userName, String userEmail, String google) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("first_name", userName);
             jsonObject.put("email", userEmail);
-
-
+            jsonObject.put("source", google);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -111,15 +112,16 @@ public class LoginActivity extends AppCompatActivity {
 
         RequestBody requeestBody = RequestBody.create(APIUrl.JSON, jsonObject.toString());
         Request request = APIClient.getPostRequest(api_url, requeestBody);
-        Log.e("ashish", "" + jsonObject.toString());
+        Log.e("vritt2 signin req obj", "" + jsonObject.toString());
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NonNull okhttp3.Call call, @NonNull IOException e) {
-                Log.e("ashish", e.getMessage() + "");
+                Log.e("vritt2 singin onFail", e.getMessage() + "");
             }
 
             @Override
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
+                Log.e("vritt2 singin onResponse", response.code() + "");
                 runOnUiThread(() -> {
                     if (response.code() == 200) {
                         try {
@@ -130,7 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
                     }
                 });
             }
@@ -138,15 +139,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setData(String data) {
-        Log.d("data", data);
+        Log.d("vritt2 signin resp data", data);
 
         // store the token
         try {
             JSONObject jsonObject = new JSONObject(data);
             String accessToken = jsonObject.optString("accessToken");
+            String userId = jsonObject.optString("userId");
             boolean isKYC = jsonObject.optBoolean("isKYC");
             SharedPrefUtil.putString(KeyConstants.KEY_ACCESS_TOKEN, accessToken, this);
             SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, isKYC, this);
+            // yaha jb first time login kiya to kyc nhi thi filled so respnse me false aay aor cahce m store ho gya
+            // ab app isko false hi read karegi jab tak ki ise true manually na kiya jaye ya fir re-login na kiya jaye
+            SharedPrefUtil.putString(KeyConstants.KEY_USERID, userId, this);
 
         } catch (JSONException e) {
             throw new RuntimeException(e);

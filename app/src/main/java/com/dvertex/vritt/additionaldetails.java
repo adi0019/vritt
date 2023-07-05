@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dvertex.vritt.Fragments.DashboardFragment;
 import com.dvertex.vritt.Utility.APIClient;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
 import com.dvertex.vritt.databinding.AdditionaldetailsBinding;
@@ -67,7 +68,7 @@ public class additionaldetails extends AppCompatActivity {
         binding.submit23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fName = SharedPrefUtil.getString("fName", "", additionaldetails.this);
+              //  String fName = SharedPrefUtil.getString("fName", "", additionaldetails.this);
                 String lName = SharedPrefUtil.getString("lName", "", additionaldetails.this);
                 String prof = SharedPrefUtil.getString("prof", "", additionaldetails.this);
                 String Add1 = SharedPrefUtil.getString("Add1", "", additionaldetails.this);
@@ -80,7 +81,7 @@ public class additionaldetails extends AppCompatActivity {
                 String Bhag = SharedPrefUtil.getString("Bhag", "", additionaldetails.this);
                 String Nagar = SharedPrefUtil.getString("Nagar", "", additionaldetails.this);
                 String Shaka = SharedPrefUtil.getString("Shaka", "", additionaldetails.this);
-                String email = SharedPrefUtil.getString("email", "", additionaldetails.this);
+              //  String email = SharedPrefUtil.getString("email", "", additionaldetails.this);
                 String etyear = binding.etyear.getText().toString().trim();
                 String dob = binding.etDob.getText().toString().trim();
                 String no = binding.etPhone.getText().toString().trim();
@@ -92,7 +93,10 @@ public class additionaldetails extends AppCompatActivity {
                 } else if (no.length() < 10) {
                     Toast.makeText(getApplicationContext(), "Phone Number  Should Greater than 10 Digits", Toast.LENGTH_SHORT).show();
                 } else {
-                    registeruser2(fName, lName, email, prof, no, role, Add1, Add2, Street, State, Pin, City, Mahanagar, Bhag, Nagar, Shaka, etyear, dob, dayitva, dayitvaLevel);
+                    registeruser2( lName,  prof, no, role, Add1, Add2, Street, State, Pin, City, Mahanagar, Bhag, Nagar, Shaka, etyear, dob, dayitva, dayitvaLevel);
+                    Log.e("error",   "reg complete after function");
+
+                    // start next
 
                 }
 
@@ -101,15 +105,13 @@ public class additionaldetails extends AppCompatActivity {
 
     }
 
-    private void registeruser2(String fName, String lName, String email, String profession, String no, String role, String add1,
+    private void registeruser2( String lName,  String profession, String no, String role, String add1,
                                String add2, String street, String state, String pin,
                                String city, String mahanagar, String bhag, String nagar,
                                String shaka, String etyear, String dob, String dayitva, String dLevel) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("first_name", fName);
             jsonObject.put("last_name", lName);
-            jsonObject.put("email", email);
             jsonObject.put("phone_number", no);
             jsonObject.put("role", role);
             jsonObject.put("fcm_token", "xyz");
@@ -134,34 +136,44 @@ public class additionaldetails extends AppCompatActivity {
             jsonObject.put("etyear", etyear);
             jsonObject.put("sangh_pravesh_year", "2023");
             jsonObject.put("dob", dob);
+            jsonObject.put("id", SharedPrefUtil.getString(KeyConstants.KEY_USERID, "", additionaldetails.this));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        Log.i("vritt2 register req body", jsonObject.toString());
+
         OkHttpClient okHttpClient = APIClient.getHttpClientWithToken();
-        String api_url = "https://gps.dvertexapp.in/auth/social-signin";
+        String api_url = "https://gps.dvertexapp.in/auth/register";
 
         RequestBody requeestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
         Request request = APIClient.getPostRequest(api_url, requeestBody);
-
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NonNull okhttp3.Call call, @NonNull IOException e) {
-                Log.e("ERROR", e.getMessage() + "");
+                Log.e("vritt2 register onFail", e.getMessage() + "");
             }
 
             @Override
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
                 runOnUiThread(() -> {
-                    if (response.isSuccessful()) {
+                    try {
+                        Log.i("vritt2 register onResponse", response.code() + " " + response.body().string()); // yaha tk okay h
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (response.code() == 200) {
                         String data = null;
                         try {
                             data = response.body().string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            Log.e("aditya error", e.getMessage());
                         }
                         setData(data);
+                        // app unisntall karke kro..ho jayega sb
+                        // is api ka docs kaha ha jo nitin ne diya thga
                     }
                 });
             }
@@ -169,22 +181,27 @@ public class additionaldetails extends AppCompatActivity {
 
     }
 
+
     private void setData(String data) {
-        try {
-            JSONObject jsonObject = new JSONObject(data);
-            String message = jsonObject.optString("message");
-            String accessToken = jsonObject.optString("accessToken");
-            SharedPrefUtil.putString("accessToken", accessToken, additionaldetails.this);
-            String userId = jsonObject.optString("userId");
-            SharedPrefUtil.putString("userId", userId, additionaldetails.this);
-            SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, true, this);
+        Log.i("vritt2 register resp data", data);
+            Toast.makeText(additionaldetails.this, "successfully updated", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(additionaldetails.this, message, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(additionaldetails.this, MainActivity.class);
+            startActivity(intent);
 
-            startActivity(new Intent(additionaldetails.this, MainActivity.class));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            // jab response success ho jaye to uyha manuaaly isko true kar dena hai so dashboard frag par jab check karega
+        // cache memory se ki kyc true h ya false to true read karke dialog nhi aayega.
+        // data api se save to ho gya hai or next time jab login karenge to dialog nhi aayega..but
+        // bina logiut and login kiye jab tak app open karoge to dialog aata rahega because cache memory me false read lar rha hai
+        // login adtivty se
+        SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, true, this);
+
+        // ab dialog aarha..ab do option hai ya to dobra login karo taki api se jab true aayega to automatically cache me true savee ho
+        // jayega or dashboard dialog nhi aayega ya fir is form ko dobara fill karo taki jb dobra register waali api hit hogi
+        // to line no 197 work karegi or cache m true save kar degi fir dialog nhi aayega
+        // relogin
+        // or kuch
+
     }
 
 }
