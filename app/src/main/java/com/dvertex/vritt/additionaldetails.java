@@ -159,21 +159,14 @@ public class additionaldetails extends AppCompatActivity {
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
                 runOnUiThread(() -> {
                     try {
-                        Log.i("vritt2 register onResponse", response.code() + " " + response.body().string()); // yaha tk okay h
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    if (response.code() == 200) {
-                        String data = null;
-                        try {
-                            data = response.body().string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Log.e("aditya error", e.getMessage());
+                        if (response.code() == 200) {
+                            if (response.body() != null){
+                                String data = response.body().string();
+                                setData(data);
+                            }
                         }
-                        setData(data);
-                        // app unisntall karke kro..ho jayega sb
-                        // is api ka docs kaha ha jo nitin ne diya thga
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 });
             }
