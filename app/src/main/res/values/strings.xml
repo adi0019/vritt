@@ -109,6 +109,7 @@
     <string name="surya_namskar">Surya Namskar</string>
     <string name="dandaprahar">Dandaprahar</string>
     <string name="todo1">TODO</string>
+    <string name="name">Name:-</string>
 
 
 </resources>

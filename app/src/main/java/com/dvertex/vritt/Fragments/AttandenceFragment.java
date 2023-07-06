@@ -26,6 +26,7 @@ import com.dvertex.vritt.R;
 import com.dvertex.vritt.SecondActivity;
 import com.dvertex.vritt.Utility.APIClient;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
+import com.dvertex.vritt.additionaldetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +78,7 @@ public class AttandenceFragment extends Fragment {
 
         init();
 
-        Toast.makeText(mContext, "This is home dashboard fragment called", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(mContext, "This is home dashboard fragment called", Toast.LENGTH_SHORT).show();
 
         return  view;
     }
@@ -110,7 +111,20 @@ public class AttandenceFragment extends Fragment {
 
             @Override
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
-                mContext.runOnUiThread(null);
+                Log.e("xox", response.code() + "");
+                mContext.runOnUiThread(() -> {
+                    try {
+                        if (response.code() == 200) {
+                            if (response.body() != null){
+                                String data = response.body().string();
+                                setData(data);
+                            }
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+               // Toast.makeText(AttandenceFragment.this, "successfully updated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -120,8 +134,8 @@ public class AttandenceFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(data);
             String message = jsonObject.optString("message");
 
-//            Toast.makeText(AttandenceFragment.this, message, Toast.LENGTH_SHORT).show();
-//            finish();
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(mContext, MainActivity.class));
         } catch (JSONException e) {
             e.printStackTrace();
         }

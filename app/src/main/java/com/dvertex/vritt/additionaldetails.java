@@ -159,23 +159,17 @@ public class additionaldetails extends AppCompatActivity {
             public void onResponse(@NonNull okhttp3.Call call, @NonNull okhttp3.Response response) {
                 runOnUiThread(() -> {
                     try {
-                        Log.i("vritt2 register onResponse", response.code() + " " + response.body().string()); // yaha tk okay h
-                    } catch (IOException e) {
+                        if (response.code() == 200) {
+                            if (response.body() != null){
+                                String data = response.body().string();
+                                setData(data);
+                            }
+                        }
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                    if (response.code() == 200) {
-                        String data = null;
-                        try {
-                            data = response.body().string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Log.e("aditya error", e.getMessage());
-                        }
-                        setData(data);
-                        // app unisntall karke kro..ho jayega sb
-                        // is api ka docs kaha ha jo nitin ne diya thga
-                    }
                 });
+                // pehle setData(data) tak compile nhi ho rha tha...abi read karega
             }
         });
 
@@ -183,24 +177,14 @@ public class additionaldetails extends AppCompatActivity {
 
 
     private void setData(String data) {
-        Log.i("vritt2 register resp data", data);
+        Log.i("vritt2 register resp data", data); // yaha par
             Toast.makeText(additionaldetails.this, "successfully updated", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(additionaldetails.this, MainActivity.class);
             startActivity(intent);
 
-            // jab response success ho jaye to uyha manuaaly isko true kar dena hai so dashboard frag par jab check karega
-        // cache memory se ki kyc true h ya false to true read karke dialog nhi aayega.
-        // data api se save to ho gya hai or next time jab login karenge to dialog nhi aayega..but
-        // bina logiut and login kiye jab tak app open karoge to dialog aata rahega because cache memory me false read lar rha hai
-        // login adtivty se
         SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, true, this);
 
-        // ab dialog aarha..ab do option hai ya to dobra login karo taki api se jab true aayega to automatically cache me true savee ho
-        // jayega or dashboard dialog nhi aayega ya fir is form ko dobara fill karo taki jb dobra register waali api hit hogi
-        // to line no 197 work karegi or cache m true save kar degi fir dialog nhi aayega
-        // relogin
-        // or kuch
 
     }
 
