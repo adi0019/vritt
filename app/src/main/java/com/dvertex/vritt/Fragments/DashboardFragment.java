@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dvertex.vritt.Attendance;
@@ -58,6 +59,13 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        String fName = SharedPrefUtil.getString("fName", "fName", mContext);
+//        String email = SharedPrefUtil.getString("userEmail", "email", mContext);
+//        TextView mTextView = view.findViewById(R.id.name);
+//        mTextView.setText(fName);
+//        TextView mTextView1 = view.findViewById(R.id.email);
+//        mTextView1.setText(email);
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
         // initiliaze the contxt 
@@ -68,6 +76,12 @@ public class DashboardFragment extends Fragment {
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(mContext, gso);
+        String fName = SharedPrefUtil.getString("userName", "userName", mContext);
+        String email = SharedPrefUtil.getString("userEmail", "email", mContext);
+        TextView mTextView = view.findViewById(R.id.name);
+        mTextView.setText(fName);
+        TextView mTextView1 = view.findViewById(R.id.email);
+        mTextView1.setText(email);
         
         init();
 

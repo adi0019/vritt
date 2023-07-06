@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
        fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
        
        if (fragment instanceof AttandenceFragment){
-           Toast.makeText(this, "Yes its Attand Frag", Toast.LENGTH_SHORT).show();
+         //  Toast.makeText(this, "Yes its Attand Frag", Toast.LENGTH_SHORT).show();
            DashboardFragment fragment1 = new DashboardFragment()    ;
            attachFragment(fragment1);
        } else {
-           Toast.makeText(this, "No it is not", Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(this, "No it is not", Toast.LENGTH_SHORT).show();
        }
     }
 }

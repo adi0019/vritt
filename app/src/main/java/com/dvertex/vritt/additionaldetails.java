@@ -169,6 +169,7 @@ public class additionaldetails extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 });
+                // pehle setData(data) tak compile nhi ho rha tha...abi read karega
             }
         });
 
@@ -176,24 +177,14 @@ public class additionaldetails extends AppCompatActivity {
 
 
     private void setData(String data) {
-        Log.i("vritt2 register resp data", data);
+        Log.i("vritt2 register resp data", data); // yaha par
             Toast.makeText(additionaldetails.this, "successfully updated", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(additionaldetails.this, MainActivity.class);
             startActivity(intent);
 
-            // jab response success ho jaye to uyha manuaaly isko true kar dena hai so dashboard frag par jab check karega
-        // cache memory se ki kyc true h ya false to true read karke dialog nhi aayega.
-        // data api se save to ho gya hai or next time jab login karenge to dialog nhi aayega..but
-        // bina logiut and login kiye jab tak app open karoge to dialog aata rahega because cache memory me false read lar rha hai
-        // login adtivty se
         SharedPrefUtil.putBoolean(KeyConstants.IS_KYC_COMPLETED, true, this);
 
-        // ab dialog aarha..ab do option hai ya to dobra login karo taki api se jab true aayega to automatically cache me true savee ho
-        // jayega or dashboard dialog nhi aayega ya fir is form ko dobara fill karo taki jb dobra register waali api hit hogi
-        // to line no 197 work karegi or cache m true save kar degi fir dialog nhi aayega
-        // relogin
-        // or kuch
 
     }
 
