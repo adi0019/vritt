@@ -16,16 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dvertex.vritt.Attendance;
 import com.dvertex.vritt.KeyConstants;
 import com.dvertex.vritt.LoginActivity;
-import com.dvertex.vritt.MainActivity;
 import com.dvertex.vritt.R;
 import com.dvertex.vritt.SecondActivity;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
-import com.dvertex.vritt.additionaldetails;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -60,15 +56,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        String fName = SharedPrefUtil.getString("fName", "fName", mContext);
-//        String email = SharedPrefUtil.getString("userEmail", "email", mContext);
-//        TextView mTextView = view.findViewById(R.id.name);
-//        mTextView.setText(fName);
-//        TextView mTextView1 = view.findViewById(R.id.email);
-//        mTextView1.setText(email);
-        // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
-        // initiliaze the contxt 
         mContext = getActivity();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -123,11 +111,9 @@ public class DashboardFragment extends Fragment {
     }
 
     private void openDialog() {
-//        Dialog exampleDialog = new Dialog();
-//        exampleDialog.show(getSupportFragmentManager(), "example dialog");
         builder = new AlertDialog.Builder(mContext);
         builder.setTitle("Alert")
-                .setMessage("Registration is not Completed")
+                .setMessage("Registration is not Complete")
                 .setCancelable(true)
                 .setNegativeButton("Complete  Registration", new DialogInterface.OnClickListener() {
                     @Override

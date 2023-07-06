@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dvertex.vritt.R;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
-import com.dvertex.vritt.databinding.MatraShakaBinding;
 
 
 public class Matra_shaka extends AppCompatActivity {
@@ -104,7 +102,7 @@ public class Matra_shaka extends AppCompatActivity {
                     SharedPrefUtil.putString("Shaka", Shaka, Matra_shaka.this);
 
                     // done, now next page
-                    startActivity(new Intent(Matra_shaka.this, dayitva.class));
+                    startActivity(new Intent(Matra_shaka.this, Dayitva.class));
                 }
             });
         }

@@ -1,8 +1,6 @@
 package com.dvertex.vritt.Fragments;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,15 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.dvertex.vritt.Attendance;
 import com.dvertex.vritt.KeyConstants;
-import com.dvertex.vritt.LoginActivity;
 import com.dvertex.vritt.MainActivity;
 import com.dvertex.vritt.R;
-import com.dvertex.vritt.SecondActivity;
 import com.dvertex.vritt.Utility.APIClient;
 import com.dvertex.vritt.Utility.SharedPrefUtil;
-import com.dvertex.vritt.additionaldetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,14 +64,12 @@ public class AttandenceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String count = count1.getText().toString().trim();
-                String userId = SharedPrefUtil.getString("userId","", mContext);
+                String userId = SharedPrefUtil.getString(KeyConstants.KEY_USERID,"", mContext);
                 registeruser3(count, userId);
             }
         });
 
         init();
-
-      //  Toast.makeText(mContext, "This is home dashboard fragment called", Toast.LENGTH_SHORT).show();
 
         return  view;
     }
@@ -124,7 +115,6 @@ public class AttandenceFragment extends Fragment {
                         throw new RuntimeException(e);
                     }
                 });
-               // Toast.makeText(AttandenceFragment.this, "successfully updated", Toast.LENGTH_SHORT).show();
             }
         });
 

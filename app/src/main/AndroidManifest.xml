@@ -38,10 +38,10 @@
             android:name="com.dvertex.vritt.MainActivity"
             android:exported="true" />
         <activity
-            android:name="com.dvertex.vritt.dayitva"
+            android:name="com.dvertex.vritt.Dayitva"
             android:exported="true" />
         <activity
-            android:name="com.dvertex.vritt.additionaldetails"
+            android:name="com.dvertex.vritt.AdditionalDetails"
             android:exported="true" />
         <activity
             android:name="com.dvertex.vritt.Matra_shaka"
